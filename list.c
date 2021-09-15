@@ -11,10 +11,19 @@
 #include "list.h"
 
 list_t *list_alloc() { 
-  return (list_t *)malloc(sizeof(list_t));
+  list_t * linkedList = (list_t *)malloc(sizeof(list_t));
+  linkedList->head = NULL;
+  return linkedList;
   }
+
 void list_free(list_t *l) {
-  free(l);
+  node_t * head = l->head;
+  node_t * temp = NULL;
+  while (head != NULL) {
+    temp = head->next;
+    free(head);
+    head = temp;
+ }
 }
 
 void list_print(list_t *l) {
